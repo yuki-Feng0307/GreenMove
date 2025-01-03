@@ -1,6 +1,6 @@
 # GreenMove
 
-![https://img.shields.io/badge/python-3.8-green]
+![](https://img.shields.io/badge/python-3.8-green)
 
 ![image](https://github.com/yuki-feng0307/GreenMove/blob/main/img/fig1.png)
 
