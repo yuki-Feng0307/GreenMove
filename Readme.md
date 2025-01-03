@@ -1,6 +1,6 @@
 # GreenMove
 
-![fig111111](/Users/fengyuting/Documents/phd/research/urban_park/paper/scientificdata/Code_for_public/img/fig111111.png)
+![image](https://github.com/yuki-feng0307/GreenMove/blob/main/img/fig1.png)
 
 
 
