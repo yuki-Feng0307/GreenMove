@@ -14,7 +14,7 @@ from matplotlib.font_manager import FontProperties
 
 
 ''' data '''
-# first download our CSV file from fishare
+# first download our CSV file from zenodo
 # import dataset
 df = pd.read_csv("train_daily_pairflow_exp_8-4.csv")
 # print(len(df))
