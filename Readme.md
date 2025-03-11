@@ -28,13 +28,25 @@ pip install -r requirements.txt
 
 ## File Description
 
-The repository contains the code for network construction and GBM.
+The repository contains the code for network construction, visualization and GBM.
 
 #### Network construction
 
 Although the datasets obtained from platforms such as Anjuke, Baidu Maps, and the Shanghai Big Data Center cannot be made publicly accessible, the construction process of the GreenMove network can still be understood from the code we developed here.
 
+#### Network visualization
+
+Corresponds to Figure2 and Figure3 in the paper.
+
+##### Run the code
+
+```
+python daily_network_property.py
+```
+
 #### GBM
+
+We use the GBM model to demonstrate the predictability of flow.
 
 ##### Run the code
 
@@ -42,3 +54,8 @@ Although the datasets obtained from platforms such as Anjuke, Baidu Maps, and th
 python GBM_daily_pairflow.py
 ```
 
+
+
+#### Data load example
+
+If you want to load  and  view any individual files, an example of ipynb (data_load_example.ipynb) is given here.
