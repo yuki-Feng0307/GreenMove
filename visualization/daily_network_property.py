@@ -20,7 +20,12 @@ pkl_files = [f for f in os.listdir(directory) if f.endswith('.pkl')]
 pkl_files.sort()
 
 for filename in pkl_files:
-    # '2014-02-12.pkl', '2014-02-13.pkl', '2014-02-14.pkl', '2014-02-15.pkl', '2014-02-16.pkl': dates with incomplete data
+    # '2014-02-03.pkl", '2014-02-12.pkl', '2014-02-13.pkl', '2014-02-14.pkl', '2014-02-15.pkl', '2014-02-16.pkl': dates with incomplete data
+    if filename == '2014-02-04.pkl':
+        edge_counts.append(None)
+        edge_commuter_ratios.append(None)
+        edge_distance.append(None)
+        flow.append(None)
     if filename == '2014-02-17.pkl':
         for _ in range(5):
             edge_counts.append(None)
