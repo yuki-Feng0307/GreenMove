@@ -141,8 +141,13 @@ def polygon_park_graph(dense_poly, park_shp, df, weather, save_path):
     group_counts = df_grouped.size().reset_index(name='flow')
     # total outflow per polygon
     total_flow_per_poly = group_counts.groupby('grid_id')['flow'].sum()
-    group_counts['flow_ratio'] = group_counts.apply(lambda row: row['flow'] / total_flow_per_poly[row['grid_id']],
-                                                    axis=1)
+    group_counts['flow_ratio_polygon'] = group_counts.apply(
+        lambda row: row['flow'] / total_flow_per_poly[row['grid_id']],
+        axis=1)
+    total_flow_per_park = group_counts.groupby('park_id')['flow'].sum()
+    group_counts['flow_ratio_park'] = group_counts.apply(
+        lambda row: row['flow'] / total_flow_per_park[row['park_id']], axis=1)
+
     distance_data = []
     for name, group in df_grouped:
         first_row = group.iloc[0]
@@ -159,8 +164,8 @@ def polygon_park_graph(dense_poly, park_shp, df, weather, save_path):
     final_df = pd.merge(merged_df, distance_df, on=['grid_id', 'park_id'], how='inner')
 
     df_grouped = final_df.groupby(['grid_id', 'park_id'])
-    df_sorted = final_df.sort_values(by='flow_ratio', ascending=False).reset_index(drop=True)
-    df_sorted['cumulative_ratio'] = df_sorted.groupby(['grid_id', 'park_id'])['flow_ratio'].transform('cumsum')
+    df_sorted = final_df.sort_values(by='flow_ratio_polygon', ascending=False).reset_index(drop=True)
+    df_sorted['cumulative_ratio'] = df_sorted.groupby(['grid_id', 'park_id'])['flow_ratio_polygon'].transform('cumsum')
     df_sorted['include'] = (df_sorted['cumulative_ratio'] <= 1) | (
                 df_sorted.groupby(['grid_id', 'park_id'])['cumulative_ratio'].shift(1) <= 1)
     final_df_filtered = df_sorted[df_sorted['include']]
@@ -182,7 +187,8 @@ def polygon_park_graph(dense_poly, park_shp, df, weather, save_path):
 
         G.add_edge(poly_node_name, park_node_name,
                    flow=exp_flow,
-                   flow_ratio=row['flow_ratio'],
+                   flow_ratio_polygon=row['flow_ratio_polygon'],
+                   flow_ratio_park=row['flow_ratio_park'],
                    commuter_ratio=row['commuter_ratio'],
                    distance=row['distance'])
 
